@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8"/></head>
+<body>
+
+	    <section class="layout-content" layout:fragment="corpo">
+	        <nav class="navbar navbar-expand-md bg-light">
+	            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	                <ul class="navbar-nav mr-auto">
+	                    <li class="nav-item active">
+	                        <i class="oi oi-caret-right"></i>
+	                        <span>Lista de Pagamentos</span>
+	                    </li>
+	                </ul>
+	                <a class="btn btn-primary btn-md" th:href="@{/pagamentos/cadastrar}" role="button">
+	                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+	                    <span>Cadastrar Pagamentos</span>
+	                </a>
+	            </div>
+	        </nav>
+	
+	        <div class="container">
+	        
+	         <!-- mensagem de sucesso ou falha -->
+	      	 <div th:replace="fragments/alert"></div>
+	
+	            <p>
+	                <i class="oi oi-magnifying-glass"></i><span></span>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                        aria-controls="collapseNome">Título
+	                </button>
+	                
+	                  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCliente"
+	                        aria-controls="collapseServico">Cliente
+	                </button>
+	                
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseServico"
+	                        aria-controls="collapseServico">Serviço
+	                </button>
+	                
+	              
+	                 
+	              
+	            </p>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseNome">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="pesquisarTitulo">
+	                                <input class="form-control mr-sm-2" type="search" placeholder="Título" aria-label="Search"
+	                                       name="titulo" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	            
+	                <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseServico">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="pesquisarPorServico">
+	                                <select class="form-control mr-sm-2" name="servico" aria-label="Search">
+	                                     <option th:each="s : ${servicos}" th:value="${s.id}" th:text="${s.nome}"></option>
+	                             
+	                                </select>
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	            
+	            
+	                    <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseCliente">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="pesquisarPorCliente">
+	                                <select class="form-control mr-sm-2" name="cliente" aria-label="Search">
+	                                     <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nome}"></option>
+	                             
+	                                </select>
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	      
+	            
+	          
+	            <div class="table-responsive">
+	                <table class="table table-striped table-hover table-sm">
+	                    <thead>
+	                    <tr>
+	                        <th>Cliente</th>
+	                        <th>Serviço</th>
+	                        <th>Título</th>
+	                        <th>Valor</th>
+	                        <th>Data pagamento</th>
+	                        <th>Status pagamento</th>
+	                        <th>Ação</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+	                    <tr th:each="p : ${pagamentos}">
+	                       <td th:text="${p.cliente.nome}"></td>
+	                        <td th:text="${p.servico.nome}"></td>
+	                        <td th:text="${p.titulo}"></td>
+	                        <td th:text="|R$ ${{p.valorPagar}}"></td>
+	                        <td th:text="${#temporals.format(p.dataPagamento, 'dd/MM/yyyy')}"></td>
+	                        <td th:text="${p.StatusPagamento.nome}"></td>
+	                     
+	                        <td colspan="2">
+	             				 <a class="btn btn-info btn-sm" th:href="@{/pagamentos/editar/{id} (id=${p.id})}" role="button">
+	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+	                            </a>
+	                           <button th:id="${ 'btn_pagamentos/excluir/' + p.id }" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+	                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
+	                            </button>
+	                        </td>
+	                    </tr>
+	    
+	           
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+	        
+	        <div th:replace="fragments/modal :: modal"></div>
+	    </section>
+
+</body>
+
+	
+	<script th:inline="javascript" th:fragment="inlinescript"></script>
+</html>		

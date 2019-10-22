@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Gerenciamento de Clientes ::: Login</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="clínica médica com agendamento de consultas online" />
+<link rel="icon" th:href="@{/image/favicon.ico}" />
+<!-- Icons fontawesome -->
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" crossorigin="anonymous" rel="stylesheet" />
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/style-login.css}" rel="stylesheet" />
+</head>
+<body>
+
+
+	 <section>
+	 	
+	 	
+				<main role="main" class="descolar">
+					<section class="jumbotron text-center">
+						<img class="d-block mx-auto mb-4" src="/image/clientes-png.png"
+							width="72" height="72">
+						<div class="container">
+							<h1 class="jumbotron-heading">Gerenciamento de Clientes</h1>
+							<p class="lead text-muted">Desenvolvemos a solução que seu negócio precisa</p>
+						</div>				
+					</section>	
+					
+					<div class="album py-5 bg-light">
+						<div class="container d-flex justify-content-center">
+							<div class="alert alert-success" role="alert">
+							  <h4 class="alert-heading">Seja bem vindo!</h4>
+							  <p>Seu cadastro foi realizado com sucesso.</p>
+							  <hr>
+							  <p class="mb-0">Em breve você receberá um email para confirmação 
+							  de sua conta de acesso.</p><br/>
+							  <p>Ir para o login <a href="/login">Clique aqui.</a></p>
+							</div>
+						</div>
+					</div>
+					
+				
+				</main>
+				
+		 </section>
+	
+</body>
+</html>
