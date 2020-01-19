@@ -16,4 +16,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
    @Query("select u from Usuario u where u.email like :email AND u.ativo = true")
    Optional<Usuario> findByEmailAtivo(String email);
 
+   //para pegar o usuario atual, do chamado
+   @Query("select u from Usuario u where u.email like :email")
+   Optional<Usuario> findByUsuarioEmail(String email);
+
 }

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>Gerenciamento de Clientes ::: ORÇAMENTO</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="clínica médica com agendamento de consultas online" />
+<link rel="icon" th:href="@{/image/favicon.ico}" />
+<!-- Icons fontawesome -->
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" crossorigin="anonymous" rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css(v=${version}) }" rel="stylesheet" />
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/style-login.css(v=${version})}" rel="stylesheet" />
+<script th:src="@{/webjars/jquery/jquery.min.js(v=${version}) }"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js(v=${version}) }"></script>
+</head>
+<body>	
+	<form class="form-signin was-validated" method="POST" 
+		th:action="@{/orcamentos/cadastro/salvar}" th:object="${orcamento}">		
+		<div class="text-center mb-4">
+			<img class="mb-4" th:src="@{/image/clientes-png.png}" alt=""
+				width="72" height="72">
+			<h1 class="h3 mb-3 font-weight-normal">Solicite o seu orçamento</h1>
+
+			
+			<p class="text-muted">Estaremos entrando em contato o mais rápido possível!</p>
+		</div>
+		
+		<!-- mensagem de sucesso ou falha -->
+	    <div th:replace="fragments/alert"></div>
+		
+		<div th:if="${#fields.hasAnyErrors()}">	
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<div th:each="error : ${#fields.detailedErrors()}">
+				  <i class="oi oi-warning"></i>
+					<span th:text="${error.message}"></span>
+				</div>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</div>	
+			<div class="form-label-group">
+			<input type="text" id="inputNome" class="form-control" placeholder="nome" 
+				th:field="*{nome}" required autofocus />
+			<label for="inputEmail">Nome</label>
+			<div class="invalid-feedback">
+				Informe o seu nome.
+			</div>
+		</div>
+		
+		
+			<div class="form-label-group">
+			<input type="text" id="inputTelefone" class="form-control" placeholder="telefone" 
+				th:field="*{telefone}" required/>
+			<label for="inputTelefone">Telefone</label>
+			<div class="invalid-feedback">
+				Informe o seu telefone.
+			</div>
+		</div>
+		
+		
+			<div class="form-label-group">
+				<div class="custom-control custom-switch">
+								  <input type="checkbox" class="custom-control-input" 
+								  			th:field="*{whats}" id="whats" 
+								  			th:if="${whats == true ? 'checked=checked' : ''}" />
+								  <label class="custom-control-label" for="whats">Se o telefone for whats. Ative este botão</label>
+	                	</div>
+			
+		</div>
+		
+		
+			<div class="form-label-group">
+			<input type="text" id="inputTitulo" class="form-control" placeholder="Título" 
+				th:field="*{titulo}" required/>
+			<label for="inputTitulo">Título</label>
+			<div class="invalid-feedback">
+				Informe um título.
+			</div>
+		</div>
+		
+		
+		
+			<div class="form-label-group">
+		
+			<textarea type="text" id="inputDescricao" class="form-control" placeholder="Descrição" 
+				th:field="*{descricao}" required  rows="10"></textarea>
+			
+			<div class="invalid-feedback">
+				Informe a descrição.
+			</div>
+		</div>
+
+	
+
+		<button class="btn btn-lg btn-info btn-block" type="submit">Confirmar</button>
+		<hr>
+		<nav class="nav nav-pills flex-column flex-sm-row">
+			<a class="flex-sm-fill text-sm-left nav-link text-decoration-none" th:href="@{/}">
+				<i class="fas fa-home"></i>&nbsp;Home</a>
+		</nav>
+		<p class="mt-5 mb-3 text-muted text-center">Gerenciamento de Clientes&copy; 2019</p>
+	</form>
+</body>
+</html>

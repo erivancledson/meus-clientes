@@ -18,6 +18,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 	<!-- Custom styles for this template -->
 	<link th:href="@{/css/style.css}" rel="stylesheet" />
+	
 </head>
 <body>
 	<header th:replace="fragments/header :: cabecalho">
@@ -48,8 +49,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<script th:src="@{/webjars/jquery-mask-plugin/dist/jquery.mask.min.js}"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> <!-- no listar clientes o botao endereco utiliza ele -->
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+	<script th:src="@{/js/usuarios.js}" th:fragment="js"></script>
 	
 	<script type="text/javascript">
+	
+	
 	
 
 	//para a caixa de confirmação

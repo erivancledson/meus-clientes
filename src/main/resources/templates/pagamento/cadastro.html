@@ -34,7 +34,7 @@
 	            <form th:action="${pagamento.id == null} ? @{/pagamentos/salvar} : @{/pagamentos/editar}" method="POST" th:object="${pagamento}">
 	            
 	                      <div class="form-row">
-	                <input type="hidden" id="id" th:field="*{id}"/>
+	                		<input type="hidden" id="id" th:field="*{id}"/>
 	                
 	                       <div class="form-group col-md-6">
 	                        <label for="servico">Serviço</label>
@@ -47,7 +47,7 @@
 	                        </div>
 	                    </div>
 	                    
-	                           <div class="form-group col-md-6">
+	                     <div class="form-group col-md-6">
 	                        <label for=""cliente"">Cliente</label>
 	                        <select id=""cliente"" class="form-control" th:field="*{cliente}" th:classappend="${#fields.hasErrors('cliente')} ? 'is-invalid'">
 	                            <option value="">Selecione...</option>
@@ -85,9 +85,9 @@
 	                
 	                <div class="form-row">
 	                 
-	                    <div class="form-group col-md-6">
+	                     <div class="form-group col-md-6">
 	                        <label for="dataPagamento">Data de pagamento</label>
-	                        <input type="date" class="form-control" id="dataPagamento" th:field="*{dataPagamento}" th:classappend="${#fields.hasErrors('dataPagamento')} ? 'is-invalid'"/>
+	                        <input type="date" class="form-control" id="datepicker" th:field="*{dataPagamento}" th:classappend="${#fields.hasErrors('dataPagamento')} ? 'is-invalid'"/>
 	                        <div class="invalid-feedback">
 									<span th:errors="*{dataPagamento}"></span>
 	                        </div>
@@ -116,6 +116,7 @@
 	                        </div>
 	                    </div>
 	                    
+	                   
 	                 </div>
 	        
 	       
@@ -126,6 +127,8 @@
 	 
 
 </body>
+
+
 
 	
 	<script th:inline="javascript" th:fragment="inlinescript"></script>

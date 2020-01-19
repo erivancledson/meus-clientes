@@ -2,7 +2,7 @@ package br.com.erivan.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 @SuppressWarnings("serial")
@@ -42,9 +41,8 @@ public class Pagamento implements Serializable{
 	private BigDecimal valorPagar;
 	
 	@NotNull
-	@DateTimeFormat(iso = ISO.DATE) //salva somente a data, mas tem varios tipos de formaas de salvar a data
-	@Column(name = "data_pagamento", nullable = false,  columnDefinition = "DATE")
-	private LocalDate dataPagamento;
+	@Temporal(TemporalType.DATE)
+	private Date dataPagamento;
 	
 	@NotNull
 	@Column(nullable = false)
@@ -89,11 +87,11 @@ public class Pagamento implements Serializable{
 		this.valorPagar = valorPagar;
 	}
 
-	public LocalDate getDataPagamento() {
+	public Date getDataPagamento() {
 		return dataPagamento;
 	}
 
-	public void setDataPagamento(LocalDate dataPagamento) {
+	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
 	}
 

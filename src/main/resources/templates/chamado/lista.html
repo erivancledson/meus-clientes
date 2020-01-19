@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8"/></head>
+<body>
+
+	    <section class="layout-content" layout:fragment="corpo">
+	
+	        <nav class="navbar navbar-expand-md bg-light">
+	            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	                <ul class="navbar-nav mr-auto">
+	                    <li class="nav-item active">
+	                        <i class="oi oi-caret-right"></i>
+	                        <span>Chamados</span>
+	                    </li>
+	                </ul>
+	             
+	            </div>
+	        </nav>
+	
+	        <div class="container" id="listagem">
+	        <!-- mensagem de sucesso ou falha -->
+	      	<div th:replace="fragments/alert"></div>
+	        
+	           <p>
+	                <i class="oi oi-magnifying-glass"></i><span></span>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                        aria-controls="collapseNome">Nome
+	                </button>
+	             
+	              
+	            </p>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseNome">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="pesquisarCliente">
+	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+	                                       name="nome" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	          
+	            
+	         
+	
+	            <div class="table-responsive">
+	                <table class="table table-striped table-hover table-sm">
+	                    <thead>
+	                    <tr>
+	                     
+	                        <th>Assunto</th>
+	                        <th>Descrição</th>
+	                        <th>Data</th>
+	                        <th>Status</th>
+	                        <th>Cliente</th>
+	                        <th>Ação</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+	                    <tr th:each="c : ${chamados}">
+	                        
+	                        <td th:text="${c.assunto}"></td>
+	                        <td th:text="${c.descricao}"></td>
+	                        <td th:text="${#dates.format(c.dataChamado, 'dd-MMM-yyyy')}"></td>
+	                        <td th:text="${c.StatusChamado.nome}"></td>
+	                        <td th:text="${c.usuario.email}"></td>
+	                            <td>
+		                   
+		                        </td>
+	                        <td colspan="2">
+	                        
+	                          <a class="btn btn-info btn-sm" th:href="@{/chamados/editar/{id} (id=${c.id})}" role="button">
+	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+	                            </a>
+	                         
+	                        </td>
+	                    </tr>
+	              
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+		  <div th:replace="fragments/modal :: modal"></div>
+	    </section>
+	
+
+</body>
+
+	
+	<script th:inline="javascript" th:fragment="inlinescript"></script>
+</html>		

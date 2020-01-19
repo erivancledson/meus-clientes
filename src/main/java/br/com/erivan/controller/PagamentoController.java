@@ -1,10 +1,13 @@
 package br.com.erivan.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -126,8 +129,22 @@ public class PagamentoController {
 		return modelAndView;
 	}
 	
-	
+	//pesquisar por  data
+		@GetMapping("**/pesquisarPorPeriodoPagamento")
+		public ModelAndView pesquisarPorPeriodo(@RequestParam("dataInicio")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dataInicio , @RequestParam("dataFim") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  Date dataFim) {
+			ModelAndView modelAndView = new ModelAndView("pagamento/lista");
+			modelAndView.addObject("pagamentos", pagamentoRepository.findPagamentoByDate(dataInicio , dataFim));
+			return modelAndView;
+		}
+		
+		//pesquisar por status
+	 //   @GetMapping("**/pesquisarStatusPagamento")
+	//    public ModelAndView pesquisarstatusPagamento(@RequestParam("nome") StatusPagamento nome) {
+	//		ModelAndView modelAndView = new ModelAndView("pagamento/lista");
+	//		modelAndView.addObject("pagamentos", pagamentoRepository.findPagamentoByStatusPagamento(nome));
+	//		return modelAndView;
+	//	}
 
-	
+
   
 }

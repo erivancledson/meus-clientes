@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "CLIENTES")
@@ -40,6 +42,8 @@ public class Cliente implements Serializable{
 	
 	@OneToMany(mappedBy = "cliente")
 	private List<Pagamento> pagamentos;
+	
+
 	
 	public Long getId() {
 		return id;
@@ -89,6 +93,8 @@ public class Cliente implements Serializable{
 	public void setPagamentos(List<Pagamento> pagamentos) {
 		this.pagamentos = pagamentos;
 	}
+
+
 
 	
 }

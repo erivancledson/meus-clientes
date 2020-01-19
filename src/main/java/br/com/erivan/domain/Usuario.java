@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -60,6 +61,9 @@ public class Usuario implements Serializable{
 	public Usuario(String email) {
 		this.email = email;
 	}
+	//usuario cliente faz chamado
+	@OneToMany(mappedBy = "usuario")
+	private List<Chamado> chamados;
 	
 	
 	public Long getId() {
@@ -125,6 +129,14 @@ public class Usuario implements Serializable{
 
 	public void setCodigoVerificador(String codigoVerificador) {
 		this.codigoVerificador = codigoVerificador;
+	}
+
+	public List<Chamado> getChamados() {
+		return chamados;
+	}
+
+	public void setChamados(List<Chamado> chamados) {
+		this.chamados = chamados;
 	}
 	
 	

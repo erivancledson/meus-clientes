@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.erivan.domain.Cliente;
+import br.com.erivan.domain.Usuario;
 import br.com.erivan.repository.ClienteRepository;
 
 @Service
@@ -39,11 +40,15 @@ public class ClienteService {
 	public List<Cliente> buscarTodos(){
 		return clienteRepository.findAll();
 	}
-
+	//verifica se tem pagamentos associados ao id
 	public boolean clienteTemPagamentos(Long id) {
 		if(buscarPorId(id).getPagamentos().isEmpty()) {
 			return false;
 		}
 		return true;
 	}
+	
+
+
+
 }

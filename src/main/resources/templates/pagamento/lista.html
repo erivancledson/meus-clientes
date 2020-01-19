@@ -38,6 +38,13 @@
 	                        aria-controls="collapseServico">Serviço
 	                </button>
 	                
+	                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseDataPagamento"
+	                        aria-controls="collapseServico">Data Pagamento
+	                </button>
+	                
+	                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseStatusPagamento"
+	                        aria-controls="collapseServico">Status pagamento
+	                </button>
 	              
 	                 
 	              
@@ -75,6 +82,39 @@
 	                    </div>
 	                </div>
 	            </div>
+	            
+	               
+	                  <div class="col">
+	                    <div class="collapse" id="collapseDataPagamento">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="pesquisarPorPeriodoPagamento">
+	                                <input class="form-control mr-sm-2" type="date"  name="dataInicio" />
+	                                <input class="form-control mr-sm-2" type="date"  name="dataFim" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	                
+	                
+	                  <div class="col">
+	                    <div class="collapse" id="collapseStatusPagamento">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" action="pesquisarStatusPagamento">
+	                                <select class="form-control mr-sm-2" name="nome" aria-label="Search">
+	                                     <option th:each="s : ${status}" th:value="${s}" th:text="${s.nome}"></option>
+	                             
+	                             
+	                                </select>
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
 	            
 	            
 	                    <div class="row">
@@ -116,7 +156,7 @@
 	                        <td th:text="${p.servico.nome}"></td>
 	                        <td th:text="${p.titulo}"></td>
 	                        <td th:text="|R$ ${{p.valorPagar}}"></td>
-	                        <td th:text="${#temporals.format(p.dataPagamento, 'dd/MM/yyyy')}"></td>
+	                       <td th:text="${#dates.format(p.dataPagamento, 'dd-MMM-yyyy')}"></td>
 	                        <td th:text="${p.StatusPagamento.nome}"></td>
 	                     
 	                        <td colspan="2">

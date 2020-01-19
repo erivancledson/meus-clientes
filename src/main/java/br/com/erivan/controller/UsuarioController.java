@@ -7,6 +7,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -174,6 +177,35 @@ public class UsuarioController {
 		    	return "login";
 		    	
 		    }
+		    
+		    //editar senha dentro do painel
+		    @GetMapping("/editar/senha")
+		    public String abrirEditarSenha() {
+		    	return "usuario/editar-senha";
+		    }
+		    
+		    @PreAuthorize("hasAnyAuthority('ADMIN', 'FINANCEIRO', 'CLIENTE')")
+		    @PostMapping("/confirmar/senha")
+		    public String editarSenha(@RequestParam("senha1") String s1, @RequestParam("senha2") String s2, 
+		    						  @RequestParam("senha3") String s3, @AuthenticationPrincipal User user,
+		    						  RedirectAttributes attr) {
+		    	// se senha 1 for diferente da senha 2
+		    	if (!s1.equals(s2)) {
+		    		attr.addFlashAttribute("fail", "Senhas não conferem, tente novamente");
+		    		return "redirect:/usuarios/editar/senha";
+		    	}
+		    	
+		    	Usuario u = service.buscarPorEmail(user.getUsername()); //busca do usuario do banco de dados
+		    	if(!UsuarioService.isSenhaCorreta(s3, u.getSenha())) {
+		    		attr.addFlashAttribute("fail", "Senha atual não confere, tente novamente");
+		    		return "redirect:/usuarios/editar/senha";
+		    	}
+		    		//objeto usuario e a nova senha digitada
+		    	service.alterarSenha(u, s1);
+		    	attr.addFlashAttribute("success", "Senha alterada com sucesso.");
+		    	return "redirect:/usuarios/editar/senha";
+		    }
+		    
 		
 	
 }

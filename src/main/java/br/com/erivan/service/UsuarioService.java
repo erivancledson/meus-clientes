@@ -118,7 +118,7 @@ public class UsuarioService  implements UserDetailsService{
 	
 	//chama o enviar do emails service
 	public void emailDeConfirmacaoDeCadastro(String email) throws MessagingException {
-		//tansforma o email em base 64
+		//transforma o email em base 64, gerando um codigo
 		String codigo = Base64Utils.encodeToString(email.getBytes());
 		emailService.enviarPedidoDeConfirmacaoDeCadastro(email, codigo);
 	}
@@ -151,11 +151,24 @@ public class UsuarioService  implements UserDetailsService{
 				emailService.enviarPedidoRedefinicaoSenha(email, verificador);
 	}
 
-	//alterar senha por email
+	//alterar senha do usuario
 	@Transactional(readOnly = false)
 	public void alterarSenha(Usuario usuario, String senha) {
 		usuario.setSenha(new BCryptPasswordEncoder().encode(senha)); //pega a senha e salva
 		repository.save(usuario);		
+	}
+
+	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
+		return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada); //compara as duas senhas se são iguais
+		
+	}
+	
+	//para pegar qual foi o usuario que enviou o chamado
+	@Transactional(readOnly = true)
+	public Usuario buscarPorUsuarioEmail(String email) {
+		// TODO Auto-generated method stub
+		return repository.findByUsuarioEmail(email).orElse(new Usuario());
+
 	}
 
 	

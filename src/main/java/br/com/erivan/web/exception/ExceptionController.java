@@ -10,7 +10,7 @@ import br.com.erivan.exception.AcessoNegadoException;
 @ControllerAdvice
 public class ExceptionController {
 	
-	//excessao para quem tentar acessar uma consulta via url que não lhe pertense
+	//excessao para quem tentar acessar uma consulta via url que não lhe pertence
 	@ExceptionHandler(AcessoNegadoException.class)
 	public ModelAndView acessoNegadoException(AcessoNegadoException ex) {
 		ModelAndView model = new ModelAndView("error");
